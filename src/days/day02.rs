@@ -1,12 +1,5 @@
 use itertools::Itertools;
-use std::fs::File;
-use std::io::prelude::*;
-
-fn load_input() -> Vec<Vec<isize>> {
-    let mut input = File::open("inputs/input2").unwrap();
-    let mut contents = String::new();
-    input.read_to_string(&mut contents).unwrap();
-
+fn load_input(contents: String) -> Vec<Vec<isize>> {
     // converts the string into the correct format (array of ints by line)
     return contents
         .lines()
@@ -30,8 +23,8 @@ fn good_reactor_fold(acc: isize, x: (&isize, &isize)) -> Result<isize, ()> {
         Err(())
     }
 }
-fn part1() -> usize {
-    load_input()
+fn part1(input: String) -> usize {
+    load_input(input)
         .iter()
         .filter(|row| {
             row.into_iter()
@@ -42,8 +35,8 @@ fn part1() -> usize {
         })
         .count()
 }
-fn part2() -> usize {
-    load_input()
+fn part2(input: String) -> usize {
+    load_input(input)
         .iter()
         .filter(|row| {
             row.iter()
@@ -60,6 +53,6 @@ fn part2() -> usize {
         })
         .count()
 }
-pub fn solve() {
-    println!("Part 1: {}\nPart 2: {}", part1(), part2())
+pub fn solve(input: String) {
+    println!("Part 1: {}\nPart 2: {}", part1(input.clone()), part2(input.clone()))
 }

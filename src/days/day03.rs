@@ -1,13 +1,3 @@
-use std::fs::File;
-use std::io::prelude::*;
-
-fn load_input() -> String {
-    let mut input = File::open("inputs/input3").unwrap();
-    let mut contents = String::new();
-    input.read_to_string(&mut contents).unwrap();
-    return contents;
-}
-
 fn parse_input1(input: String) -> isize {
     let parsed = input
         .split("mul(")
@@ -44,7 +34,7 @@ fn parse_input2(input: String) -> isize {
     return parse_input1(preprocess);
 }
 
-pub fn solve() {
-    println!("{:?}", parse_input1(load_input()));
-    println!("{:?}", parse_input2(load_input()));
+pub fn solve(input: String) {
+    println!("{:?}", parse_input1(input.clone()));
+    println!("{:?}", parse_input2(input));
 }

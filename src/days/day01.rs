@@ -1,12 +1,6 @@
-use std::fs::File;
-use std::io::prelude::*;
 use std::iter::zip;
 
-fn part1() {
-    let mut input = File::open("inputs/input1").unwrap();
-    let mut contents = String::new();
-    input.read_to_string(&mut contents).unwrap();
-
+fn part1(contents: String) {
     let mut left: Vec<i32> = contents
         .lines()
         // split the two columns
@@ -30,11 +24,7 @@ fn part1() {
     println!("Part 1: {:?}", distance);
 }
 
-fn part2() {
-    let mut input = File::open("inputs/input1").unwrap();
-    let mut contents = String::new();
-    input.read_to_string(&mut contents).unwrap();
-
+fn part2(contents: String) {
     let mut left: Vec<i32> = contents
         .lines()
         .map(|line| line.split("   ").collect::<Vec<&str>>())
@@ -54,7 +44,7 @@ fn part2() {
     println!("Part 2: {:?}", total);
 }
 
-pub fn solve() {
-    part1();
-    part2()
+pub fn solve(input: String) {
+    part1(input.clone());
+    part2(input.clone())
 }
