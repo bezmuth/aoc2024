@@ -1,4 +1,5 @@
-fn parse_input1(input: String) -> isize {
+// about 250 µs for both
+fn parse_input1(input: &str) -> isize {
     let parsed = input
         .split("mul(")
         .map(|instruction| {
@@ -24,17 +25,16 @@ fn parse_input1(input: String) -> isize {
     parsed.iter().map(|(a, b)| a * b).sum()
 }
 
-fn parse_input2(input: String) -> isize {
+fn parse_input2(input: &str) -> isize {
     let preprocess = input
         .split("do()") // split along the dos
-        .map(|x| x.split("don't()").collect::<Vec<_>>()[0]) // now remove anything after dont
+        .map(|x| x.split("don't()").next().unwrap()) // now remove anything after dont
         .collect::<Vec<&str>>()
         .join("");
 
-    return parse_input1(preprocess);
+    return parse_input1(&preprocess);
 }
 
-pub fn solve(input: String) {
-    println!("{:?}", parse_input1(input.clone()));
-    println!("{:?}", parse_input2(input));
+pub fn solve(input: String) -> (isize, isize) {
+    (parse_input1(&input), parse_input2(&input))
 }

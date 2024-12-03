@@ -3,12 +3,8 @@ fn load_input(contents: String) -> Vec<Vec<isize>> {
     // converts the string into the correct format (array of ints by line)
     return contents
         .lines()
-        .map(|line| line.split(" ").collect::<Vec<&str>>())
-        .map(|line| {
-            line.iter()
-                .map(|num| num.parse::<isize>().unwrap())
-                .collect()
-        })
+        .map(|line| line.split(" "))
+        .map(|line| line.map(|num| num.parse::<isize>().unwrap()).collect())
         .collect::<Vec<Vec<isize>>>();
 }
 fn good_reactor_fold(acc: isize, x: (&isize, &isize)) -> Result<isize, ()> {
@@ -28,7 +24,7 @@ fn part1(input: String) -> usize {
         .iter()
         .filter(|row| {
             row.into_iter()
-                        // gives current and next val as tuple
+                // gives current and next val as tuple
                 .tuple_windows()
                 .try_fold(0, good_reactor_fold)
                 .is_ok()
@@ -53,6 +49,6 @@ fn part2(input: String) -> usize {
         })
         .count()
 }
-pub fn solve(input: String) {
-    println!("Part 1: {}\nPart 2: {}", part1(input.clone()), part2(input.clone()))
+pub fn solve(input: String) -> (usize, usize) {
+    (part1(input.clone()), part2(input.clone()))
 }
