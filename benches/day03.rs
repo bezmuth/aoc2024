@@ -8,11 +8,11 @@ fn harness() {
     let mut contents = String::new();
     input.read_to_string(&mut contents).unwrap();
 
-    day03::solve(contents);
+    day03::solve(&contents);
 }
 
 fn criterion_benchmark(c: &mut Criterion) {
-    c.bench_function("day3", |b| b.iter(|| harness()));
+    c.bench_function("day3", |b| b.iter(harness));
 }
 
 criterion_group!(benches, criterion_benchmark);
