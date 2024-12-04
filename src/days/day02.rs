@@ -1,9 +1,9 @@
 use itertools::Itertools;
-fn load_input(contents: String) -> Vec<Vec<isize>> {
+fn load_input(contents: &str) -> Vec<Vec<isize>> {
     // converts the string into the correct format (array of ints by line)
     return contents
         .lines()
-        .map(|line| line.split(" "))
+        .map(|line| line.split(' '))
         .map(|line| line.map(|num| num.parse::<isize>().unwrap()).collect())
         .collect::<Vec<Vec<isize>>>();
 }
@@ -19,11 +19,11 @@ fn good_reactor_fold(acc: isize, x: (&isize, &isize)) -> Result<isize, ()> {
         Err(())
     }
 }
-fn part1(input: String) -> usize {
+fn part1(input: &str) -> usize {
     load_input(input)
         .iter()
         .filter(|row| {
-            row.into_iter()
+            row.iter()
                 // gives current and next val as tuple
                 .tuple_windows()
                 .try_fold(0, good_reactor_fold)
@@ -31,7 +31,7 @@ fn part1(input: String) -> usize {
         })
         .count()
 }
-fn part2(input: String) -> usize {
+fn part2(input: &str) -> usize {
     load_input(input)
         .iter()
         .filter(|row| {
@@ -49,6 +49,6 @@ fn part2(input: String) -> usize {
         })
         .count()
 }
-pub fn solve(input: String) -> (usize, usize) {
-    (part1(input.clone()), part2(input.clone()))
+pub fn solve(input: &str) -> (usize, usize) {
+    (part1(input), part2(input))
 }
